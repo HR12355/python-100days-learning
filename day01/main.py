@@ -2,3 +2,5 @@
 
 print("Day01 start")
 print("Hello, Python!")
+
+print("確認")
