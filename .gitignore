@@ -2,3 +2,5 @@
 .idea/
 保存フォルダ/
 Affidavit/
+__pycache__/
+*.pyc
