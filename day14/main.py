@@ -4,11 +4,12 @@
 # やったこと
 # higher lower game
 # 小さな問題に分解して考えること。
+
 # 分かったこと
 # from game_data import dataという書き方をすると、ファイルの名前を省略
+
 # 詰まったこと
 # どこまでを定義するのか
-
 # ======================
 from game_data import data #game_dataの中のdata
 import art #art全体
