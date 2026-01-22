@@ -1,6 +1,10 @@
 # PyCharm
-.idea/
+# /.idea/ と書くと： .gitignore が置いてある場所と同じ階層 のものだけを無視します。
+/.idea/
 保存フォルダ/
 Affidavit/
 __pycache__/
 *.pyc
+venv/
+.idea/
+day18/picture/
