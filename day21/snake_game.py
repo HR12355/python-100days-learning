@@ -46,8 +46,10 @@ while game_is_on:
 
     #壁とぶつかった時
     if 285 < snake.head.xcor() or snake.head.xcor() < -285 or 285 < snake.head.ycor() or snake.head.ycor() < -285:
-        game_is_on = False
-        scoreboard.game_over()
+        # game_is_on = False
+        # scoreboard.game_over()
+        scoreboard.reset()
+        snake.reset()
 
     #尻尾とぶつかった時
     # for segment in snake.segments:
@@ -56,10 +58,12 @@ while game_is_on:
     #     elif snake.head.distance(segment) < 10:#distanceの引数にturtleも入れられる
     #         game_is_on = False
     #         scoreboard.game_over()
-
     for segment in snake.segments[1:]:
         if snake.head.distance(segment) < 10:#distanceの引数にturtleも入れられる
-            game_is_on = False
-            scoreboard.game_over()
+            # game_is_on = False
+            # scoreboard.game_over()
+            scoreboard.reset()
+            snake.reset()
+
 
 screen.exitonclick()
