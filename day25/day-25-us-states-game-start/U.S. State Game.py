@@ -32,10 +32,11 @@ while on_game:
 
     # exitで答えられなかった州をcsvとして保存
     if answer_state == "Exit":
-        missing_states = []
-        for state in data.state.to_list():
-            if state not in answer_box:
-                missing_states.append(state)
+        # missing_states = []
+        # for state in data.state.to_list():
+        #     if state not in answer_box:
+        #         missing_states.append(state)
+        missing_states = [state for state in data.state.to_list() if state not in answer_box]
         new_data = pandas.DataFrame(missing_states)
         new_data.to_csv("missing states.csv")
         break

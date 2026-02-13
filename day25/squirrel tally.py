@@ -4,7 +4,6 @@
 # やったこと
 # csvファイルの扱い
 # pandasの使い方
-# アメリカ州のクイズゲーム
 
 # 分かったこと
 # CSV = Comma Separated Values
