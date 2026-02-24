@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox # サブモジュールらしい
 from random import choice, randint, shuffle
 import pyperclip
+import json
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 #Password Generator Project
@@ -30,21 +31,51 @@ def add_data():
     website_data = website_entry.get()
     info_data = info_entry.get()
     pass_data = pass_entry.get()
+    new_data = {
+        website_data: {
+            "email": info_data,
+            "password": pass_data
+        }
+    }
 
     if len(website_data) == 0 or len(pass_data) == 0:
         messagebox.showwarning(title="oops", message="Please don't leave any fields empty!")
     else:
-        is_ok = messagebox.askokcancel(title="website", message=f"There are the details entered: \n"
-                                                        f"Email: {info_data} \nPassword: {pass_data} \n"
-                                                        f"Is it ok to save?")
-        if is_ok:
-            with open("save_password.txt", "a") as data:
-                data.write(f"{website_data} | {info_data} | {pass_data} \n")
+        try:
+            with open("save_password.json", "r") as data_file:
+                # json.dump(new_data, data_file, indent=4)
+                data = json.load(data_file) # 古いデータの読み込み
+        except FileNotFoundError:
+            with open("save_password.json", "w") as data_file:
+                json.dump(new_data, data_file, indent=4)
+
+        else:
+            data.update(new_data) # 古いデータの更新
+
+            with open("save_password.json", "w") as data_file:
+                json.dump(data, data_file, indent=4)  # 更新されたデータの保存
+        finally:
             data_clear()
 
 def data_clear():
     website_entry.delete(0, END)
     pass_entry.delete(0, END)
+
+# ---------------------------- FIND PASSWORD ------------------------------- #
+def find_password():
+    website_search = website_entry.get()
+    try:
+        with open("save_password.json", "r") as data_file:
+            data_search = json.load(data_file)
+
+        messagebox.showinfo(website_search, f"Email: {data_search[website_search]['email']}\n"
+                                        f"Password: {data_search[website_search]['password']}")
+    except FileNotFoundError:
+        messagebox.showerror("Error", "No Data File Found!")
+    except KeyError:
+        messagebox.showerror("Error", "No details for the website exists!")
+    finally:
+        website_entry.delete(0, END)
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
@@ -69,8 +100,8 @@ pass_label.grid(column=0, row=3)
 
 
 # entry
-website_entry = Entry(width=51)
-website_entry.grid(column=1, row=1, columnspan=2)
+website_entry = Entry(width=33)
+website_entry.grid(column=1, row=1)
 website_entry.focus()
 
 
@@ -91,5 +122,6 @@ generate_pass_button.grid(column=2, row=3)
 add_button = Button(text="Add", width=43, bg="white", command=add_data)
 add_button.grid(column=1, row=4, columnspan=2)
 
-
+search_button = Button(text="Search", bg="white", width=14, command=find_password)
+search_button.grid(column=2, row=1)
 window.mainloop()
