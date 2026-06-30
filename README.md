@@ -7,7 +7,7 @@ Pythonを独学で勉強中です。
 - PONG：PythonとTurtleで作った卓球ゲーム
 
 ## 使用技術
-- Python
+- Python3.14
 
 ## 目標
 IT業界への就職を目指しています。
