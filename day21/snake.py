@@ -40,7 +40,7 @@ class Snake:
         self.add_segment(self.segments[-1].position())
 
     def move(self):
-        for seg_num in range(len(self.segments) - 1, 0, -1):#先頭以外は前のブロックに移動
+        for seg_num in range(len(self.segments) - 1, 0, -1):#先頭以外は前のブロックに移動 2→1→0の順
             new_x = self.segments[seg_num - 1].xcor()
             new_y = self.segments[seg_num - 1].ycor()
             self.segments[seg_num].goto(new_x, new_y)  # 最後のセグメントが最後から二番目のセグメントの座標に移動
